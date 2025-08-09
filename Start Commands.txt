@@ -1,0 +1,28 @@
+deepspeed --num_gpus=1 train.py \
+    --deepspeed \
+    --config /workspace/diffusion-pipe/toml/wan_2.2_high.toml
+
+
+
+
+example 2:
+
+cd /app/diffusion-pipe
+deepspeed --num_gpus=1 train.py --deepspeed --config /workspace/diffusion-pipe/toml/wan_2.2_high.toml
+
+cd /app/diffusion-pipe
+deepspeed --num_gpus=1 train.py --deepspeed --config /workspace/toml/wan_2.2_low.toml
+
+
+/workspace/models/wan22/t2v-a14b/high_noise_model/diffusion_pytorch_model-00005-of-00006.safetensors
+
+/workspace/models/wan22/t2v-a14b/high_noise_model/diffusion_pytorch_model-00001-of-00006.safetensors
+
+/workspace/models/wan22/t2v-a14b/low_noise_model/diffusion_pytorch_model.safetensors.index.json
+
+
+
+workspace/models/wan22/t2v-a14b/high_noise_model/diffusion_pytorch_model-00001-of-00006.safetensors
+
+workspace/models/wan22/t2v-a14b/low_noise_model/diffusion_pytorch_model-00001-of-00006.safetensors
+
