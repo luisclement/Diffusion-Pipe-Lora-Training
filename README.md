@@ -1,7 +1,24 @@
 # diffusion-pipe
-A pipeline parallel training script for diffusion models.
+A pipeline parallel training script for diffusion models based on the original work done by tdrussell
+diffusion-pipe that can be found here: https://github.com/tdrussell/diffusion-pipe
 
-Currently supports Wan2.1 (t2v and i2v), Wan2.2.
+The focus of my changes is to train Loras for Wan2.2 model.
+
+# features added or changed
+
+1. files to start training for high and low models
+2. script in python to run and find the best checkpoint from the training to keep and export
+3. a sh script to redirect if needed TensorBoard to the dataset as it is being exported to:
+   /worksapce/outputs
+4. 
+
+
+
+
+
+
+
+## Information bellow cololected from original and other forks ##
 
 ## Features
 - Pipeline parallelism, for training models larger than can fit on a single GPU
@@ -13,11 +30,9 @@ Currently supports Wan2.1 (t2v and i2v), Wan2.2.
 - Easily add new models by implementing a single subclass
 
 ## Recent changes
-- 2025-07-29
   - Support Wan2.2.
     - The 5B is tested and fully validated on t2i training.
     - All other models and modes (A14B, i2v, timestep ranges) are tested to confirm they run and that the loss looks reasonable, but proper learning hasn't been validated yet.
-- 2025-07-14
   - Merge dev branch into main. Lots of changes that aren't relevant for most users. Recommended to use ```--regenerate_cache``` (or delete the cache folders) after update.
       - If something breaks, please raise an issue and use the last known good commit in the meanwhile: ```git checkout 6940992455bb3bb2b88cd6e6c9463e7469929a70```
   - Loading speed and throughput improvements for dataset caching. Will only make a big difference for very large datasets.
@@ -25,29 +40,23 @@ Currently supports Wan2.1 (t2v and i2v), Wan2.2.
   - Add ```--trust_cache``` flag that will blindly load cached metadata files if they exist, without checking if any files changed. Can make dataset loading faster for large datasets, but you must be sure nothing in the dataset has changed since last caching. You probably don't have a large enough dataset for this to be useful.
   - Add torch compile option that can speed up models. Not tested with all models.
   - Add support for edit datasets and Flux Kontext. See supported models doc for details.
-- 2025-06-27
   - OmniGen2 LoRA training is supported, but only via standard t2i training.
   - Refactored Cosmos-Predict2 implementation to align with other rectified flow models. The only effective change is that the loss weighting is slightly different.
-- 2025-06-14
   - Cosmos-Predict2 t2i LoRA training is supported. As usual, see the supported models doc for details.
   - Added option for using float8_e5m2 as the transformer_dtype.
-- 2025-06-10
   - Stable Diffusion 3 LoRA training is supported.
   - Pinned Deepspeed version to fix error caused by Deepspeed 0.17.1.
-- 2025-05-22
   - Add Automagic optimizer
   - Support i2v training for LTX-Video. Thanks @GallenShao for the PR!
   - Support multiple shuffling of tags when caching text embeddings. Credit to @gitmylo for the PR.
-- 2025-05-07
   - Switch to official implementation of LTX-Video. Allows training the 13b LTX-Video model.
-- 2025-04-19
   - Add support for first-frame-last-frame Wan model. Credit to @kabachuha for the PR.
   - Add wandb support. Credit to @ecarmen16 for the PR.
 
 ## Windows support
 It will be difficult or impossible to make training work on native Windows. This is because Deepspeed only has [partial Windows support](https://github.com/microsoft/DeepSpeed/blob/master/blogs/windows/08-2024/README.md). Deepspeed is a hard requirement because the entire training script is built around Deepspeed pipeline parallelism. However, it will work on Windows Subsystem for Linux, specifically WSL 2. If you must use Windows I recommend trying WSL 2.
 
-## Installing
+## Installing original:
 Clone the repository:
 ```
 git clone --recurse-submodules https://github.com/tdrussell/diffusion-pipe
