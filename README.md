@@ -1,3 +1,8 @@
+The description bellow is a copy of the original GIT from tdrusell that this work is based on.
+My focus is to make a soltion and pacakes that can be deploed locall vid Docker Container or to run online via Runpod.
+
+Original README:
+
 # diffusion-pipe
 A pipeline parallel training script for diffusion models based on the original work done by tdrussell
 diffusion-pipe that can be found here: https://github.com/tdrussell/diffusion-pipe
